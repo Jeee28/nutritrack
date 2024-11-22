@@ -1,52 +1,83 @@
-// Set new default font family and font color to mimic Bootstrap's default styling
-Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-Chart.defaults.global.defaultFontColor = '#858796';
-
-function number_format(number, decimals, dec_point, thousands_sep) {
-  // *     example: number_format(1234.56, 2, ',', ' ');
-  // *     return: '1 234,56'
-  number = (number + '').replace(',', '').replace(' ', '');
-  var n = !isFinite(+number) ? 0 : +number,
-    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-    s = '',
-    toFixedFix = function(n, prec) {
-      var k = Math.pow(10, prec);
-      return '' + Math.round(n * k) / k;
-    };
-  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-  if (s[0].length > 3) {
-    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-  }
-  if ((s[1] || '').length < prec) {
-    s[1] = s[1] || '';
-    s[1] += new Array(prec - s[1].length + 1).join('0');
-  }
-  return s.join(dec);
-}
-
-// Area Chart Example
+// Adjusted Area Chart Example for Nutritional Status
 var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [{
-      label: "Earnings",
+      label: "Malnourished",
       lineTension: 0.3,
-      backgroundColor: "rgba(78, 115, 223, 0.05)",
-      borderColor: "rgba(78, 115, 223, 1)",
+      backgroundColor: "rgba(255, 99, 132, 0.1)",
+      borderColor: "rgba(255, 99, 132, 1)",
       pointRadius: 3,
-      pointBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointBorderColor: "rgba(78, 115, 223, 1)",
+      pointBackgroundColor: "rgba(255, 99, 132, 1)",
+      pointBorderColor: "rgba(255, 99, 132, 1)",
       pointHoverRadius: 3,
-      pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
-      pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+      pointHoverBackgroundColor: "rgba(255, 99, 132, 1)",
+      pointHoverBorderColor: "rgba(255, 99, 132, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [30, 35, 32, 28, 25, 20, 22, 18, 15, 20, 25, 30],
+    },
+    {
+      label: "Healthy",
+      lineTension: 0.3,
+      backgroundColor: "rgba(54, 162, 235, 0.1)",
+      borderColor: "rgba(54, 162, 235, 1)",
+      pointRadius: 3,
+      pointBackgroundColor: "rgba(54, 162, 235, 1)",
+      pointBorderColor: "rgba(54, 162, 235, 1)",
+      pointHoverRadius: 3,
+      pointHoverBackgroundColor: "rgba(54, 162, 235, 1)",
+      pointHoverBorderColor: "rgba(54, 162, 235, 1)",
+      pointHitRadius: 10,
+      pointBorderWidth: 2,
+      data: [180, 185, 190, 200, 210, 220, 215, 210, 205, 200, 195, 190],
+    },
+    {
+      label: "Underweight",
+      lineTension: 0.3,
+      backgroundColor: "rgba(255, 206, 86, 0.1)",
+      borderColor: "rgba(255, 206, 86, 1)",
+      pointRadius: 3,
+      pointBackgroundColor: "rgba(255, 206, 86, 1)",
+      pointBorderColor: "rgba(255, 206, 86, 1)",
+      pointHoverRadius: 3,
+      pointHoverBackgroundColor: "rgba(255, 206, 86, 1)",
+      pointHoverBorderColor: "rgba(255, 206, 86, 1)",
+      pointHitRadius: 10,
+      pointBorderWidth: 2,
+      data: [60, 55, 58, 50, 45, 40, 42, 45, 50, 55, 58, 60],
+    },
+    {
+      label: "Overweight",
+      lineTension: 0.3,
+      backgroundColor: "rgba(75, 192, 192, 0.1)",
+      borderColor: "rgba(75, 192, 192, 1)",
+      pointRadius: 3,
+      pointBackgroundColor: "rgba(75, 192, 192, 1)",
+      pointBorderColor: "rgba(75, 192, 192, 1)",
+      pointHoverRadius: 3,
+      pointHoverBackgroundColor: "rgba(75, 192, 192, 1)",
+      pointHoverBorderColor: "rgba(75, 192, 192, 1)",
+      pointHitRadius: 10,
+      pointBorderWidth: 2,
+      data: [40, 38, 35, 40, 42, 45, 50, 52, 48, 45, 42, 40],
+    },
+    {
+      label: "Obese",
+      lineTension: 0.3,
+      backgroundColor: "rgba(153, 102, 255, 0.1)",
+      borderColor: "rgba(153, 102, 255, 1)",
+      pointRadius: 3,
+      pointBackgroundColor: "rgba(153, 102, 255, 1)",
+      pointBorderColor: "rgba(153, 102, 255, 1)",
+      pointHoverRadius: 3,
+      pointHoverBackgroundColor: "rgba(153, 102, 255, 1)",
+      pointHoverBorderColor: "rgba(153, 102, 255, 1)",
+      pointHitRadius: 10,
+      pointBorderWidth: 2,
+      data: [20, 22, 25, 30, 35, 40, 38, 36, 32, 30, 28, 25],
     }],
   },
   options: {
@@ -62,23 +93,22 @@ var myLineChart = new Chart(ctx, {
     scales: {
       xAxes: [{
         time: {
-          unit: 'date'
+          unit: 'month'
         },
         gridLines: {
           display: false,
           drawBorder: false
         },
         ticks: {
-          maxTicksLimit: 7
+          maxTicksLimit: 12
         }
       }],
       yAxes: [{
         ticks: {
           maxTicksLimit: 5,
           padding: 10,
-          // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return value + ' children';
           }
         },
         gridLines: {
@@ -91,7 +121,7 @@ var myLineChart = new Chart(ctx, {
       }],
     },
     legend: {
-      display: false
+      display: true
     },
     tooltips: {
       backgroundColor: "rgb(255,255,255)",
@@ -103,14 +133,14 @@ var myLineChart = new Chart(ctx, {
       borderWidth: 1,
       xPadding: 15,
       yPadding: 15,
-      displayColors: false,
+      displayColors: true,
       intersect: false,
       mode: 'index',
       caretPadding: 10,
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ' + tooltipItem.yLabel + ' children';
         }
       }
     }

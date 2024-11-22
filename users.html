@@ -12,7 +12,6 @@
     <title>NutriTrack | Child Informations</title>
 
     <!-- Custom fonts for this template-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -114,6 +113,7 @@
                         <span>Users</span></a>
                 </li>
     
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -283,7 +283,6 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                                <button class="new_message">Message</button>
                             </div>
                         </li>
 
@@ -325,135 +324,11 @@
                 </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-                <div class="container-fluid">
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Child Information</h1>
                 
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Add New Entry</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <!-- Input Fields -->
-                                <input type="text" id="name" placeholder="Name" required>
-                                <input type="number" id="age" placeholder="Age" min="1" required>
-                                <input type="text" id="gender" placeholder="Gender" required>
-                                <input type="number" id="weight" placeholder="Weight (kg)" min="1" required>
-                                <input type="number" id="height" placeholder="Height (cm)" min="1" required>
-                                <button type="button" id="addEntryBtn">Add Entry</button>
-                                <br><br><br><br>
-                                  <!-- Search Bar -->
-                                
-                                <input
-                                type="text"
-                                id="searchBar" placeholder="Search here......"
-                                style="width: 30%; padding: 10px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 5px;">
-                                <i class="fas fa-search fa-sm"></i>
-                                <!-- Table -->
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Age</th>
-                                            <th>Gender</th>
-                                            <th>Weight</th>
-                                            <th>Height</th>
-                                            <th>BMI</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <!-- Dynamic rows will be added here -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Add Font Awesome for Icons -->
-                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-                
-                <script>
-                    // Initialize ID counter
-                    let idCounter = 1;
-                
-                    // Function to calculate BMI
-                    function calculateBMI(weight, height) {
-                        const heightInMeters = height / 100;
-                        return (weight / (heightInMeters * heightInMeters)).toFixed(1);
-                    }
-                
-                    // Function to determine status
-                    function getStatus(bmi) {
-                        return bmi < 18.5 ? "Malnourished" : "Healthy";
-                    }
-                
-                    // Event listener for "Add Entry" button
-                    document.getElementById("addEntryBtn").addEventListener("click", function () {
-                        const name = document.getElementById("name").value;
-                        const age = document.getElementById("age").value;
-                        const gender = document.getElementById("gender").value;
-                        const weight = document.getElementById("weight").value;
-                        const height = document.getElementById("height").value;
-                
-                        if (!name || !age || !gender || !weight || !height) {
-                            alert("Please fill in all fields.");
-                            return;
-                        }
-                
-                        const bmi = calculateBMI(weight, height);
-                        const status = getStatus(bmi);
-                
-                        const tableBody = document.querySelector("#dataTable tbody");
-                        const newRow = document.createElement("tr");
-                
-                        // Add row data dynamically
-                        newRow.innerHTML = `
-                            <td>nutri-${idCounter++}</td>
-                            <td>${name}</td>
-                            <td>${age}</td>
-                            <td>${gender}</td>
-                            <td>${weight}</td>
-                            <td>${height}</td>
-                            <td>${bmi}</td>
-                            <td style="background-color: ${status === "Malnourished" ? "red" : "green"}; color: white;">${status}</td>
-                            <td>
-                                <button class="btn btn-sm btn-primary edit-btn">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-sm btn-danger delete-btn">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        `;
-                
-                        // Append new row to the table
-                        tableBody.appendChild(newRow);
-                
-                        // Add event listeners for the buttons
-                        newRow.querySelector(".delete-btn").addEventListener("click", function () {
-                            newRow.remove();
-                            alert("Row deleted successfully!");
-                        });
-                
-                        newRow.querySelector(".edit-btn").addEventListener("click", function () {
-                            alert(`Edit function triggered for: ${name}`);
-                        });
-                
-                        // Clear input fields
-                        document.getElementById("name").value = "";
-                        document.getElementById("age").value = "";
-                        document.getElementById("gender").value = "";
-                        document.getElementById("weight").value = "";
-                        document.getElementById("height").value = "";
-                    });
-                </script>
-                <br><br><br><br><br><br><br><br><br>
+
+            </div>
+            <!-- End of Main Content -->
+
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
